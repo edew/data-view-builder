@@ -1,0 +1,19 @@
+{
+  "name": "data-view-builder",
+  "version": "0.0.0",
+  "description": "A DataView builder :)",
+  "main": "index.js",
+  "scripts": {
+    "test": "echo \"Error: no test specified\" && exit 1"
+  },
+  "keywords": [
+    "dataview",
+    "builder"
+  ],
+  "author": "Edward Dewhurst <edward@dewhurst.io>",
+  "license": "ISC",
+  "devDependencies": {
+    "chai": "^3.5.0",
+    "mocha": "^2.5.3"
+  }
+}
