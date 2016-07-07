@@ -78,7 +78,7 @@ describe('DataViewBuilder', function() {
     ['Test', 'Hello, world!'].forEach(function(input) {
         it('adds ASCII string equal to "' + input + '" to result', function() {
             var builder = new DataViewBuilder();
-            builder.asciiString(input);
+            builder.ascii(input);
             var view = builder.build();
             var actualString = '';
             for (var i = 0; i < input.length; i++) {
