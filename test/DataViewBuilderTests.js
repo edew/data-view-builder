@@ -75,6 +75,19 @@ describe('DataViewBuilder', function() {
         });
     });
 
+    ['Test', 'Hello, world!'].forEach(function(input) {
+        it('adds ASCII string equal to "' + input + '" to result', function() {
+            var builder = new DataViewBuilder();
+            builder.asciiString(input);
+            var view = builder.build();
+            var actualString = '';
+            for (var i = 0; i < input.length; i++) {
+                actualString += String.fromCharCode(view.getUint8(i));
+            }
+            assert.equal(actualString, input);
+        });
+    });
+
     it('can chain all methods', function() {
         var builder = new DataViewBuilder();
         var view = builder.uint8(1)
