@@ -17,7 +17,7 @@ describe('DataViewBuilder', function() {
             var builder = new DataViewBuilder();
             builder.uint16(input);
             var view = builder.build();
-            assert.equal(view.getUint16(0), input);
+            assert.equal(view.getUint16(0, true), input);
         });
     });
 
@@ -26,7 +26,7 @@ describe('DataViewBuilder', function() {
             var builder = new DataViewBuilder();
             builder.uint32(input);
             var view = builder.build();
-            assert.equal(view.getUint32(0), input);
+            assert.equal(view.getUint32(0, true), input);
         });
     });
 
@@ -44,7 +44,7 @@ describe('DataViewBuilder', function() {
             var builder = new DataViewBuilder();
             builder.int16(input);
             var view = builder.build();
-            assert.equal(view.getInt16(0), input);
+            assert.equal(view.getInt16(0, true, true), input);
         });
     });
 
@@ -53,7 +53,7 @@ describe('DataViewBuilder', function() {
             var builder = new DataViewBuilder();
             builder.int32(input);
             var view = builder.build();
-            assert.equal(view.getInt32(0), input);
+            assert.equal(view.getInt32(0, true), input);
         });
     });
 
@@ -62,7 +62,7 @@ describe('DataViewBuilder', function() {
             var builder = new DataViewBuilder();
             builder.float32(input);
             var view = builder.build();
-            assert.equal(view.getFloat32(0), input);
+            assert.equal(view.getFloat32(0, true), input);
         });
     });
 
@@ -71,7 +71,7 @@ describe('DataViewBuilder', function() {
             var builder = new DataViewBuilder();
             builder.float64(input);
             var view = builder.build();
-            assert.equal(view.getFloat64(0), input);
+            assert.equal(view.getFloat64(0, true), input);
         });
     });
 
@@ -102,13 +102,13 @@ describe('DataViewBuilder', function() {
 
         var actual = [
             view.getUint8(0),
-            view.getUint16(1),
-            view.getUint32(3),
+            view.getUint16(1, true),
+            view.getUint32(3, true),
             view.getInt8(7),
-            view.getInt16(8),
-            view.getInt32(10),
-            view.getFloat32(14),
-            view.getFloat64(18)
+            view.getInt16(8, true),
+            view.getInt32(10, true),
+            view.getFloat32(14, true),
+            view.getFloat64(18, true)
         ];
 
         assert.deepEqual(actual, [1,2,3,4,5,6,7,8]);
@@ -121,5 +121,21 @@ describe('DataViewBuilder', function() {
         var view = builder.build();
 
         assert.equal(view.byteLength, 0);
+    });
+
+    it('sets values in little endian order by default', function() {
+        var builder = new DataViewBuilder();
+
+        var view = builder.uint16(255).build();
+
+        assert.equal(view.getUint8(0), 255);
+    });
+
+    it('sets values in big endian order if build argument is truthy', function() {
+        var builder = new DataViewBuilder();
+
+        var view = builder.uint16(255).build(true);
+
+        assert.equal(view.getUint8(0), 0);
     });
 });
