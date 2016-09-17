@@ -1,6 +1,7 @@
 # data-view-builder
 Utility for creating [DataViews](https://developer.mozilla.org/en-US/docs/Web/JavaScript/Reference/Global_Objects/DataView)
 
+lol
 ## Installation
 Installation requires [npm](https://npmjs.org)
 
